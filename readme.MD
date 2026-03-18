@@ -1,4 +1,4 @@
-# Equipo: Scrum Masters 
+# Equipo: Sprint Masters 
 
 ## Integrantes y roles:
 ### Product owner:
