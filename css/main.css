@@ -5,6 +5,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  font-family: "Montserrat", Helvetica;
 }
 
 body::before {
@@ -25,19 +26,54 @@ body::before {
 
 header {
   width: 100%;
-  padding: 1rem;
   background-color: #222;
   color: #fff;
+}
+.navbar {
+  overflow: hidden;
+}
+
+.menu {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li a {
+  display: block;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  padding: 1.5rem 2.5rem;
+  border-radius: 0.2rem;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+.menu li a:hover {
+  background-color: #ddd;
+  color: black;
 }
 
 main {
   flex-grow: 1;
   width: 80vw;
   background-color: #ffffff;
-  margin: 2rem;
   padding: 2rem;
   border-radius: 1rem;
   opacity: 0.93;
+}
+h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 600;
+  text-align: center;
 }
 
 footer {
