@@ -64,7 +64,7 @@ main {
   flex-grow: 1;
   width: 80vw;
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 2rem 5rem;
   border-radius: 1rem;
   opacity: 0.93;
 }

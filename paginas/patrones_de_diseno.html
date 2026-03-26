@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/patrones_de_diseno.css" />
     <title>Patrones de diseño</title>
   </head>
   <body>
@@ -24,7 +25,221 @@
         </ul>
       </nav>
     </header>
-    <main></main>
+    <main>
+      <h1>Patrones de diseño</h1>
+
+      <section class="seccion-patron">
+        <h2 class="subtitulo-seccion">¿Qué son los patrones de diseño?</h2>
+        <article>
+          <p class="contenido-seccion">
+            Los patrones de diseño son soluciones habituales a problemas que
+            ocurren con frecuencia en el diseño de software. Son como planos
+            prefabricados que se pueden personalizar para resolver un problema
+            de diseño recurrente en el código.
+          </p>
+          <p class="contenido-seccion">
+            No se puede elegir un patrón y copiarlo en el programa como si se
+            tratara de funciones o bibliotecas ya preparadas. El patrón no es
+            una porción específica de código, sino un concepto general para
+            resolver un problema particular. Se pueden seguir los detalles del
+            patrón e implementar una solución que encaje con las realidades del
+            propio programa.
+          </p>
+          <p class="contenido-seccion">
+            A menudo los patrones se confunden con algoritmos porque ambos
+            conceptos describen soluciones típicas a problemas conocidos.
+            Mientras que un algoritmo siempre define un grupo claro de acciones
+            para lograr un objetivo, un patrón es una descripción de más alto
+            nivel de una solución.
+          </p>
+        </article>
+      </section>
+
+      <section class="seccion-patron">
+        <h2 class="subtitulo-seccion">Los 3 patrones más comunes</h2>
+
+        <article class="tarjeta-patron">
+          <h3>1. Singleton (Creacional)</h3>
+          <p class="contenido-seccion">
+            El patrón Singleton asegura que una clase tenga una única instancia
+            y proporciona un punto de acceso global a dicha instancia. Es útil
+            cuando se necesita controlar el acceso a algún recurso compartido,
+            como una base de datos o un archivo de configuración.
+          </p>
+          <p class="contenido-seccion">
+            Para implementarlo, se hace privado el constructor y se crea un
+            método estático que devuelva siempre la misma instancia. Un ejemplo
+            clásico es una conexión a base de datos que debe ser única en toda
+            la aplicación.
+          </p>
+          <img
+            class="diagrama"
+            src="https://refactoring.guru/images/patterns/diagrams/singleton/structure-es.png"
+            alt="Diagrama de clases del patrón Singleton"
+          />
+          <ul class="lista-caracteristicas">
+            <li>Garantiza una única instancia de la clase</li>
+            <li>Proporciona acceso global al objeto</li>
+            <li>Se inicializa solo cuando se necesita por primera vez</li>
+          </ul>
+        </article>
+
+        <article class="tarjeta-patron">
+          <h3>2. Factory Method (Creacional)</h3>
+          <p class="contenido-seccion">
+            El patrón Factory Method proporciona una interfaz para crear objetos
+            en una superclase, mientras permite a las subclases alterar el tipo
+            de objetos que se crearán. En lugar de llamar al operador new
+            directamente, se invoca a un método fábrica especial.
+          </p>
+          <p class="contenido-seccion">
+            Un ejemplo práctico es un sistema de logística: la clase base define
+            el método fábrica para crear transportes, y las subclases concretas
+            deciden si crear un camión o un barco, devolviendo objetos que
+            implementan la misma interfaz.
+          </p>
+          <img
+            class="diagrama"
+            src="https://refactoring.guru/images/patterns/diagrams/factory-method/structure.png"
+            alt="Diagrama de clases del patrón Factory Method"
+          />
+          <ul class="lista-caracteristicas">
+            <li>Evita acoplamiento fuerte entre creador y productos</li>
+            <li>Facilita agregar nuevos tipos de productos</li>
+            <li>Sigue el principio de responsabilidad única</li>
+          </ul>
+        </article>
+
+        <article class="tarjeta-patron">
+          <h3>3. Observer (Comportamiento)</h3>
+          <p class="contenido-seccion">
+            El patrón Observer define un mecanismo de suscripción para notificar
+            a varios objetos sobre cualquier evento que le suceda al objeto que
+            están observando. El objeto observado se llama notificador y los que
+            reciben las notificaciones son los suscriptores.
+          </p>
+          <p class="contenido-seccion">
+            Un ejemplo cotidiano es una suscripción a un periódico: el
+            notificador mantiene una lista de suscriptores y les envía nuevos
+            números cuando se publican. Los suscriptores pueden abandonar la
+            lista en cualquier momento.
+          </p>
+          <img
+            class="diagrama"
+            src="https://refactoring.guru/images/patterns/diagrams/observer/structure.png"
+            alt="Diagrama de clases del patrón Observer"
+          />
+          <ul class="lista-caracteristicas">
+            <li>Permite notificar a múltiples objetos sobre cambios</li>
+            <li>Los suscriptores pueden unirse o abandonar dinámicamente</li>
+            <li>Desacopla el notificador de los suscriptores</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="seccion-patron">
+        <h2 class="subtitulo-seccion">Ejemplo: Patrón Observer</h2>
+        <article>
+          <p class="contenido-seccion">
+            En este ejemplo, un editor de texto notifica a otros objetos tipo
+            servicio sobre los cambios en su estado. La lista de suscriptores se
+            compila dinámicamente: los objetos pueden empezar o parar de
+            escuchar notificaciones durante el tiempo de ejecución.
+          </p>
+          <img
+            class="diagrama"
+            src="https://refactoring.guru/images/patterns/diagrams/observer/example.png"
+            alt="Diagrama de ejemplo del patrón Observer"
+          />
+          <pre class="ejemplo-codigo"><code>
+class EventManager {
+    private listeners: hash map
+
+    subscribe(eventType, listener) {
+        listeners.add(eventType, listener)
+    }
+
+    unsubscribe(eventType, listener) {
+        listeners.remove(eventType, listener)
+    }
+
+    notify(eventType, data) {
+        foreach (listener in listeners.of(eventType)) {
+            listener.update(data)
+        }
+    }
+}
+
+class Editor {
+    public events: EventManager
+    private file: File
+
+    constructor() {
+        events = new EventManager()
+    }
+
+    openFile(path) {
+        this.file = new File(path)
+        events.notify("open", file.name)
+    }
+
+    saveFile() {
+        file.write()
+        events.notify("save", file.name)
+    }
+}
+
+interface EventListener {
+    update(filename)
+}
+
+class LoggingListener implements EventListener {
+    private log: File
+    private message: string
+
+    constructor(log_filename, message) {
+        this.log = new File(log_filename)
+        this.message = message
+    }
+
+    update(filename) {
+        log.write(replace('%s', filename, message))
+    }
+}
+
+class EmailAlertsListener implements EventListener {
+    private email: string
+    private message: string
+
+    constructor(email, message) {
+        this.email = email
+        this.message = message
+    }
+
+    update(filename) {
+        system.email(email, replace('%s', filename, message))
+    }
+}
+
+class Application {
+    config() {
+        editor = new Editor()
+
+        logger = new LoggingListener(
+            "/path/to/log.txt",
+            "Someone has opened the file: %s")
+        editor.events.subscribe("open", logger)
+
+        emailAlerts = new EmailAlertsListener(
+            "admin@example.com",
+            "Someone has changed the file: %s")
+        editor.events.subscribe("save", emailAlerts)
+    }
+}
+</code></pre>
+        </article>
+      </section>
+    </main>
     <footer>Proyecto Scrum 2026</footer>
   </body>
 </html>
